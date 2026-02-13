@@ -1,0 +1,82 @@
+Smart Bookmark App
+Built by Vinesh Gottipati
+Live Demo
+Production URL:
+https://smart-bookmark-app-gq1y.vercel.app
+GitHub Repository:
+https://github.com/vineshgottipati/smart-bookmark-app
+Project Overview
+This is a full-stack Smart Bookmark Manager built using Next.js (App Router) and Supabase.
+•	Sign in using Google OAuth only
+•	Add bookmarks (Title + URL)
+•	View only their own bookmarks (Private access)
+•	See real-time updates across tabs
+•	Delete their bookmarks
+•	Open bookmarks in a new tab
+•	Log out securely
+Tech Stack
+•	Next.js 16 (App Router)
+•	Supabase
+•	Authentication (Google OAuth)
+•	PostgreSQL Database
+•	Row Level Security (RLS)
+•	Realtime subscriptions
+•	Tailwind CSS
+•	Vercel (Deployment)
+Authentication
+•	Google OAuth only (No email/password login)
+•	Supabase Auth used for session management
+•	Production redirect URLs configured
+•	Environment variables handled securely
+Database Design
+Table: bookmarks
+•	id - uuid
+•	title - text
+•	url - text
+•	user_id - uuid
+•	created_at - timestamp
+Row Level Security (RLS)
+•	Users can SELECT their own bookmarks
+•	Users can INSERT bookmarks where user_id = auth.uid()
+•	Users can DELETE their own bookmarks
+Realtime Feature
+Supabase Realtime is enabled on the bookmarks table. If a user opens two tabs and adds or deletes a bookmark in one tab, the other tab updates automatically without refresh.
+Deployment
+The application is deployed using Vercel.
+Environment Variables used in production:
+•	NEXT_PUBLIC_SUPABASE_URL
+•	NEXT_PUBLIC_SUPABASE_ANON_KEY
+Problems Faced & Solutions
+•	Google OAuth Redirect Error (redirect_uri_mismatch) - Configured correct redirect URLs in Google Cloud Console and Supabase Auth.
+•	Supabase Environment Variables Build Error - Added environment variables in Vercel project settings.
+•	Next.js 'use client' Order Error - Ensured 'use client' is the first line in client components.
+•	Logout / Session Refresh Issues - Used supabase.auth.onAuthStateChange listener properly.
+Architecture Notes
+•	Client-side Supabase initialization
+•	Dynamic rendering to prevent prerender crashes
+•	Strict RLS enforcement
+•	Real-time subscription channel per table
+•	Clean separation of logic and UI
+How To Run Locally
+git clone https://github.com/vineshgottipati/smart-bookmark-app.git
+cd smart-bookmark-app
+npm install
+npm run dev
+Add .env.local with:
+•	NEXT_PUBLIC_SUPABASE_URL=your_url
+•	NEXT_PUBLIC_SUPABASE_ANON_KEY=your_key
+Assignment Requirements Checklist
+•	Google OAuth only
+•	Private user bookmarks
+•	Add bookmark
+•	Delete bookmark
+•	Realtime updates
+•	Next.js App Router
+•	Supabase Auth + Database + Realtime
+•	Tailwind styling
+•	Deployed on Vercel
+•	Public GitHub repo
+•	README explaining challenges
+Author
+Vinesh Gottipati
+Full Stack Developer
